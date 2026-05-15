@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "OOA Solutions Inc."
+version = "1.0.0"
+id = "artifacts/ooa-solutions"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22417
+
+[services.development]
+run = "pnpm --filter @workspace/ooa-solutions run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/ooa-solutions", "run", "build" ]
+publicDir = "artifacts/ooa-solutions/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22417"
+BASE_PATH = "/"
